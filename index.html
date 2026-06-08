@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fekry — Month 2 Training Plan v2</title>
+<style>
+  :root {
+    --bg:#0d0d0d;--bg2:#141414;--bg3:#1a1a1a;--bg4:#222222;
+    --border:#2a2a2a;--border2:#333333;--text:#e8e8e8;--text2:#999999;--text3:#666666;
+    --accent:#c8f135;--red:#ff4d4d;--blue:#4d9fff;--orange:#ff8c42;--teal:#42d6a4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+  .lang-toggle{position:fixed;top:16px;right:20px;z-index:999;display:flex;gap:6px}
+  .lang-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);padding:5px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:500;transition:all .2s}
+  .lang-btn.active{background:var(--accent);color:#000;border-color:var(--accent)}
+  .hero{padding:80px 24px 60px;max-width:860px;margin:0 auto;text-align:center}
+  .hero-badge{display:inline-block;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:24px}
+  .hero h1{font-size:clamp(42px,8vw,80px);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:20px}
+  .hero h1 span{color:var(--accent)}
+  .hero-sub{font-size:15px;color:var(--text2);margin-bottom:40px}
+  .hero-stats{display:flex;gap:1px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:600px;margin-left:auto;margin-right:auto}
+  .stat{flex:1;min-width:100px;padding:20px 16px;background:var(--bg2);text-align:center}
+  .stat-num{font-size:28px;font-weight:800;color:var(--accent);line-height:1;display:block;margin-bottom:4px}
+  .stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+  .freq-audit{max-width:860px;margin:0 auto 48px;padding:0 24px}
+  .freq-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 28px}
+  .freq-box h3{font-size:14px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+  .freq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .freq-item{background:var(--bg3);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+  .freq-muscle{font-size:13px;font-weight:500}
+  .freq-badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px}
+  .freq-2x{background:rgba(200,241,53,.12);color:var(--accent);border:1px solid rgba(200,241,53,.25)}
+  .week-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 24px 60px}
+  .week-nav a{text-decoration:none;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);padding:8px 20px;border-radius:24px;font-size:13px;font-weight:500;transition:all .2s}
+  .week-nav a:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+  .week-section{max-width:860px;margin:0 auto 80px;padding:0 24px}
+  .week-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+  .week-num{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(200,241,53,.08);border:1px solid rgba(200,241,53,.2);padding:5px 12px;border-radius:20px;white-space:nowrap;margin-top:4px}
+  .week-title{font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .week-desc{color:var(--text2);font-size:14px;margin-top:6px}
+  .day-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;margin-bottom:16px;overflow:hidden}
+  .day-header{display:flex;align-items:center;gap:12px;padding:18px 22px;cursor:pointer;user-select:none;transition:background .15s}
+  .day-header:hover{background:var(--bg3)}
+  .day-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .dot-upper{background:var(--blue)}.dot-lower{background:var(--orange)}.dot-rest{background:var(--text3)}
+  .day-name{font-size:15px;font-weight:600;flex:1}
+  .day-day{font-size:12px;color:var(--text3);font-weight:400}
+  .day-tags{display:flex;gap:5px;flex-wrap:wrap}
+  .muscle-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;background:var(--bg4);color:var(--text3);border:1px solid var(--border2)}
+  .day-progress-wrap{display:flex;align-items:center;gap:10px}
+  .day-progress-bar{width:60px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden}
+  .day-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;width:0%}
+  .day-progress-pct{font-size:11px;color:var(--text3);min-width:28px;text-align:right}
+  .day-chevron{font-size:12px;color:var(--text3);transition:transform .25s}
+  .day-card.open .day-chevron{transform:rotate(180deg)}
+  .day-body{display:none;border-top:1px solid var(--border)}
+  .day-card.open .day-body{display:block}
+  .rest-content{padding:20px 22px;color:var(--text2);font-size:14px}
+  .exercise{border-bottom:1px solid var(--border);padding:22px 22px 20px}
+  .exercise:last-child{border-bottom:none}
+  .exercise-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+  .exercise-info{flex:1}
+  .exercise-name{font-size:16px;font-weight:600;margin-bottom:3px}
+  .exercise-cat{font-size:12px;color:var(--text3)}
+  .exercise-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .badge{font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px}
+  .badge-sets{background:rgba(200,241,53,.1);color:var(--accent);border:1px solid rgba(200,241,53,.2)}
+  .badge-rpe{background:rgba(77,159,255,.1);color:var(--blue);border:1px solid rgba(77,159,255,.2)}
+  .badge-rest{background:rgba(255,140,66,.1);color:var(--orange);border:1px solid rgba(255,140,66,.2)}
+  .exercise-note{font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.5}
+  .demo-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--teal);text-decoration:none;border:1px solid rgba(66,214,164,.25);padding:5px 12px;border-radius:8px;margin-bottom:16px;transition:all .15s;font-weight:500}
+  .demo-link:hover{background:rgba(66,214,164,.08)}
+  .demo-link svg{width:12px;height:12px}
+  .cues-box{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start}
+  .cues-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);white-space:nowrap;padding-top:2px}
+  .cues-text{font-size:13px;color:var(--text2);line-height:1.5}
+  .log-table{width:100%;border-collapse:collapse;margin-top:10px}
+  .log-table th{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);padding:6px 10px;text-align:left;border-bottom:1px solid var(--border)}
+  .log-table td{padding:8px 10px;vertical-align:middle}
+  .log-table input[type="number"],.log-table input[type="text"]{background:var(--bg4);border:1px solid var(--border2);color:var(--text);padding:7px 10px;border-radius:8px;font-size:13px;width:100%;outline:none;transition:border-color .15s;-webkit-appearance:none}
+  .log-table input:focus{border-color:var(--accent)}
+  .log-table select{background:var(--bg4);border:1px solid var(--border2);color:var(--text);padding:7px 10px;border-radius:8px;font-size:13px;width:100%;outline:none;cursor:pointer}
+  .save-btn{background:transparent;border:1px solid var(--border2);color:var(--text3);padding:7px 14px;border-radius:8px;font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap;font-weight:500}
+  .save-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .save-btn.saved{border-color:var(--teal);color:var(--teal)}
+  .weekend-rest{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 22px;margin-bottom:16px}
+  .weekend-rest h4{font-size:14px;font-weight:600;margin-bottom:8px}
+  .weekend-rest p{font-size:14px;color:var(--text2)}
+  .footer-notes{max-width:860px;margin:0 auto 60px;padding:0 24px}
+  .footer-notes-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px}
+  .footer-notes-box p{font-size:13px;color:var(--text2);margin-bottom:10px;line-height:1.6}
+  .footer-notes-box p:last-child{margin-bottom:0}
+  .footer-notes-box strong{color:var(--text);font-weight:600}
+  .export-row{display:flex;gap:10px;justify-content:center;padding:0 24px 80px}
+  .export-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);padding:10px 20px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s}
+  .export-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .export-btn.danger:hover{border-color:var(--red);color:var(--red)}
+  @media(max-width:600px){.hero h1{font-size:48px}.log-table th:nth-child(4),.log-table td:nth-child(4){display:none}.day-tags{display:none}}
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('ar')">عربي</button>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">Block 2 · Weeks 5–8 · Revised</div>
+  <h1>MONTH <span>TWO</span></h1>
+  <div class="hero-sub">Upper / Lower Split · 4 Days · Fat Loss + Upper Body Shape<br>Every Muscle Hit 2× Per Week · RPE-Based Progression</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">Days / Week</span></div>
+    <div class="stat"><span class="stat-num">2×</span><span class="stat-label">Each Muscle</span></div>
+    <div class="stat"><span class="stat-num">RPE 7-8</span><span class="stat-label">Intensity</span></div>
+    <div class="stat"><span class="stat-num">~65 min</span><span class="stat-label">Per Session</span></div>
+  </div>
+</div>
+
+<!-- FREQUENCY AUDIT BOX -->
+<div class="freq-audit">
+  <div class="freq-box">
+    <h3>✅ Muscle Group Frequency — All 2× Per Week</h3>
+    <div class="freq-grid">
+      <div class="freq-item"><span class="freq-muscle">Chest</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Back</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Shoulders</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Triceps</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Biceps</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Quads</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Hamstrings</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Glutes</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Rear Delts</span><span class="freq-badge freq-2x">2× / week</span></div>
+      <div class="freq-item"><span class="freq-muscle">Calves</span><span class="freq-badge freq-2x">2× / week</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="week-nav">
+  <a href="#week5">Week 5</a>
+  <a href="#week6">Week 6</a>
+  <a href="#week7">Week 7</a>
+  <a href="#week8">Week 8</a>
+</div>
+
+<!-- PROGRAMME STRUCTURE (same for weeks 5,6,7 — week 8 deloads)
+DAY 1 — Upper A: Chest (heavy) + Back (row) + Shoulders (press) + Triceps + Rear Delts
+DAY 2 — Lower A: Quads + Hamstrings + Glutes + Calves
+DAY 3 — Rest
+DAY 4 — Upper B: Back (vertical pull) + Chest (secondary) + Shoulders (lateral) + Biceps + Rear Delts
+DAY 5 — Lower B: Posterior chain + Glutes + Quads (BSS) + Hamstrings + Calves + Core
+-->
+
+
+<!-- ===== WEEK 5 ===== -->
+<section class="week-section" id="week5">
+  <div class="week-header">
+    <div class="week-num">Week 5 — Reload</div>
+    <div><div class="week-title">Reload</div><div class="week-desc">Coming off the deload — re-establish your weights. Treat this as a second calibration week. Same weights as your last logged session, 4 sets, RPE 7-8.</div></div>
+  </div>
+
+  <!-- DAY 1: Upper A — Chest + Back + Shoulders + Triceps + Rear Delts -->
+  <div class="day-card" id="day-w5d1">
+    <div class="day-header" onclick="toggleDay('day-w5d1')">
+      <div class="day-dot dot-upper"></div>
+      <div class="day-name">Day 1 — Upper A</div>
+      <div class="day-day">Monday</div>
+      <div class="day-tags"><span class="muscle-tag">Chest</span><span class="muscle-tag">Back</span><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Triceps</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w5d1"></div></div><div class="day-progress-pct" id="pct-w5d1">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bench Press</div><div class="exercise-cat">Chest · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 6-8</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2-3 min</span></div>
+        <div class="exercise-note">Main chest builder. Heavy and controlled. Retract scapula, feet flat, bar to mid-chest.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Retract shoulder blades. Arch slightly. Grip just outside shoulder-width. Lower to mid-chest. Press up and slightly back.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-bench-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-bench-reps"></td><td><select data-key="w5d1-bench-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-bench-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell OHP</div><div class="exercise-cat">Shoulders · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 6-8</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2 min</span></div>
+        <div class="exercise-note">Standing overhead press. Best shoulder mass builder. Brace core hard, press bar in a slight arc over your head.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-overhead-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Feet shoulder-width. Brace abs tight. Bar starts at upper chest. Press straight up, head moves back slightly to let bar pass. Lock out at top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-ohp-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-ohp-reps"></td><td><select data-key="w5d1-ohp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-ohp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Row (Seated)</div><div class="exercise-cat">Back · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">V-handle. Pull to lower chest. Squeeze shoulder blades together at the end of each rep.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-cable-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-crow-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-crow-reps"></td><td><select data-key="w5d1-crow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-crow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Incline Dumbbell Press</div><div class="exercise-cat">Upper Chest · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">30-45° bench. Upper chest emphasis. Full stretch at bottom, squeeze at top.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-incline-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-incdb-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-incdb-reps"></td><td><select data-key="w5d1-incdb-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-incdb-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Tricep Pushdown (Cable)</div><div class="exercise-cat">Triceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Rope or straight bar. Elbows pinned to sides. Full extension at bottom.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-rope-pushdown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-tpd-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-tpd-reps"></td><td><select data-key="w5d1-tpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-tpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Curl</div><div class="exercise-cat">Biceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Direct bicep hit #1 this week. Shoulder-width grip, controlled negative. Don't swing.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-bcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-bcurl-reps"></td><td><select data-key="w5d1-bcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-bcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Face Pull (Cable)</div><div class="exercise-cat">Rear Delts · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Shoulder health. Keep light. Rope at face height, external rotation at end of movement.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-seated-rope-face-pull" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d1-fp-weight"></td><td><input type="number" placeholder="reps" data-key="w5d1-fp-reps"></td><td><select data-key="w5d1-fp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d1-fp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2: Lower A — Quads + Hamstrings + Glutes + Calves -->
+  <div class="day-card" id="day-w5d2">
+    <div class="day-header" onclick="toggleDay('day-w5d2')">
+      <div class="day-dot dot-lower"></div>
+      <div class="day-name">Day 2 — Lower A</div>
+      <div class="day-day">Tuesday</div>
+      <div class="day-tags"><span class="muscle-tag">Quads</span><span class="muscle-tag">Hamstrings</span><span class="muscle-tag">Glutes</span><span class="muscle-tag">Calves</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w5d2"></div></div><div class="day-progress-pct" id="pct-w5d2">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w5d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Back Squat</div><div class="exercise-cat">Quads/Glutes · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 6-8</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2-3 min</span></div>
+        <div class="exercise-note">King of lower body. ACL note: if any discomfort swap to Hack Squat. Drive knees out over toes.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Bar on upper traps. Brace core hard. Push knees out over toes. Squat to at least parallel. Drive through full foot on the way up.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d2-sq-weight"></td><td><input type="number" placeholder="reps" data-key="w5d2-sq-reps"></td><td><select data-key="w5d2-sq-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d2-sq-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Press</div><div class="exercise-cat">Quads · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Feet shoulder-width, mid-platform. Don't lock knees at top. Good quad finisher after squat.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-leg-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d2-lp-weight"></td><td><input type="number" placeholder="reps" data-key="w5d2-lp-reps"></td><td><select data-key="w5d2-lp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d2-lp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Romanian Deadlift</div><div class="exercise-cat">Hamstrings · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Push hips back — this is a hinge, not a squat. Feel the hamstring stretch. Bar stays close to legs.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-romanian-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Push hips BACK, soft knee bend. Keep bar close to legs. Flat back throughout. Squeeze glutes hard to come up.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d2-rdl-weight"></td><td><input type="number" placeholder="reps" data-key="w5d2-rdl-reps"></td><td><select data-key="w5d2-rdl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d2-rdl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Curl (Seated)</div><div class="exercise-cat">Hamstrings · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Slow 3-second eccentric on the way back. Hamstrings respond well to slow negatives.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-leg-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d2-lcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w5d2-lcurl-reps"></td><td><select data-key="w5d2-lcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d2-lcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hip Thrust (Barbell)</div><div class="exercise-cat">Glutes · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Use a pad. Drive through heels. Full hip extension at top — pause 1 second and squeeze.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-hip-thrust" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d2-ht-weight"></td><td><input type="number" placeholder="reps" data-key="w5d2-ht-reps"></td><td><select data-key="w5d2-ht-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d2-ht-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Seated Calf Raise</div><div class="exercise-cat">Calves · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 45 sec</span></div>
+        <div class="exercise-note">Full stretch at bottom, 1-second pause at peak contraction. Calves need high reps.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-seated-calf-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d2-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w5d2-calf-reps"></td><td><select data-key="w5d2-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d2-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rest Day -->
+  <div class="day-card" id="day-w5d3">
+    <div class="day-header" onclick="toggleDay('day-w5d3')">
+      <div class="day-dot dot-rest"></div><div class="day-name">Day 3 — Rest</div><div class="day-day">Wednesday</div><div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body"><div class="rest-content">Active recovery: 20-30 min bike or elliptical. No running. Light stretching and foam rolling.</div></div>
+  </div>
+
+  <!-- DAY 4: Upper B — Back + Chest + Shoulders (lateral) + Biceps + Rear Delts -->
+  <div class="day-card" id="day-w5d4">
+    <div class="day-header" onclick="toggleDay('day-w5d4')">
+      <div class="day-dot dot-upper"></div>
+      <div class="day-name">Day 4 — Upper B</div>
+      <div class="day-day">Thursday</div>
+      <div class="day-tags"><span class="muscle-tag">Back</span><span class="muscle-tag">Chest</span><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Biceps</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w5d4"></div></div><div class="day-progress-pct" id="pct-w5d4">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lat Pulldown (Bar)</div><div class="exercise-cat">Back · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 8-10</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2 min</span></div>
+        <div class="exercise-note">Wide grip. Pull to upper chest. Think elbows into back pockets. Full stretch at the top.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-pulldown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Depress scapula first. Pull elbows down to hips. Slight lean back. Bar to upper chest. Full dead-hang stretch at the top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-lpd-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-lpd-reps"></td><td><select data-key="w5d4-lpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-lpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bent Over Row</div><div class="exercise-cat">Back · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 8-10</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Hinge to 45°, overhand grip. Pull bar to belly button. One of the best mass builders for thickness.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-bent-over-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Hinge at hips ~45°. Flat back — do NOT round. Pull bar to belly button. Squeeze shoulder blades at top. Controlled negative.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-bbrow-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-bbrow-reps"></td><td><select data-key="w5d4-bbrow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-bbrow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Dumbbell Bench Press</div><div class="exercise-cat">Chest · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Second chest session of the week. Greater ROM than barbell. Deep stretch at the bottom.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-dbp-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-dbp-reps"></td><td><select data-key="w5d4-dbp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-dbp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lateral Raise (Dumbbell)</div><div class="exercise-cat">Shoulders · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Second shoulder session. Side delts = shoulder width. Light weight, feel the muscle. Lead with elbows.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-lateral-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-lat-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-lat-reps"></td><td><select data-key="w5d4-lat-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-lat-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Skull Crushers</div><div class="exercise-cat">Triceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Direct tricep hit #2 this week. EZ bar or dumbbells. Lower to forehead, elbows pointed to ceiling. Long head emphasis.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-skull-crusher" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-skull-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-skull-reps"></td><td><select data-key="w5d4-skull-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-skull-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hammer Curl</div><div class="exercise-cat">Biceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Neutral grip (palms face each other). Hits brachialis and long head. Alternating or both together.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-hammer-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-hcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-hcurl-reps"></td><td><select data-key="w5d4-hcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-hcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Rear Delt Fly (Machine)</div><div class="exercise-cat">Rear Delts · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Posture and shoulder health. Light weight, control the rep, squeeze at full extension.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-reverse-fly" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d4-rdf-weight"></td><td><input type="number" placeholder="reps" data-key="w5d4-rdf-reps"></td><td><select data-key="w5d4-rdf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d4-rdf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5: Lower B — Deadlift + BSS + Glutes + Hamstrings + Calves + Core -->
+  <div class="day-card" id="day-w5d5">
+    <div class="day-header" onclick="toggleDay('day-w5d5')">
+      <div class="day-dot dot-lower"></div>
+      <div class="day-name">Day 5 — Lower B</div>
+      <div class="day-day">Friday</div>
+      <div class="day-tags"><span class="muscle-tag">Posterior</span><span class="muscle-tag">Glutes</span><span class="muscle-tag">Hamstrings</span><span class="muscle-tag">Core</span><span class="muscle-tag">Calves</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w5d5"></div></div><div class="day-progress-pct" id="pct-w5d5">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w5d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Conventional Deadlift</div><div class="exercise-cat">Posterior Chain · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 5-6</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 3 min</span></div>
+        <div class="exercise-note">Biggest calorie burner in the programme. Flat back, bar over mid-foot, brace hard before every rep.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Bar over mid-foot. Hinge down, grip just outside legs. Brace hard. Push floor away — don't think "pull." Lock hips and knees simultaneously at top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d5-dl-weight"></td><td><input type="number" placeholder="reps" data-key="w5d5-dl-reps"></td><td><select data-key="w5d5-dl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d5-dl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Bulgarian Split Squat</div><div class="exercise-cat">Quads/Glutes · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12 each leg</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">ACL-friendly single-leg work. Dumbbells at sides. Front knee tracks over toes.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bulgarian-split-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d5-bss-weight"></td><td><input type="number" placeholder="reps" data-key="w5d5-bss-reps"></td><td><select data-key="w5d5-bss-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d5-bss-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Curl (Lying)</div><div class="exercise-cat">Hamstrings · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Hips stay pinned to the pad. Slow eccentric. Different angle to seated curl from Day 2.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-lying-leg-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d5-llcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w5d5-llcurl-reps"></td><td><select data-key="w5d5-llcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d5-llcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Standing Calf Raise</div><div class="exercise-cat">Calves · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 45 sec</span></div>
+        <div class="exercise-note">Second calf session this week. Standing variation hits gastrocnemius more than seated.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-calf-raises" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d5-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w5d5-calf-reps"></td><td><select data-key="w5d5-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d5-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w5d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Crunch</div><div class="exercise-cat">Core · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Loaded core work. Kneel in front of high cable, rope attachment. Crunch down rounding the spine. Hips stay still.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-crunch" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w5d5-cc-weight"></td><td><input type="number" placeholder="reps" data-key="w5d5-cc-reps"></td><td><select data-key="w5d5-cc-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w5d5-cc-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekend-rest">
+    <h4>Days 6 &amp; 7 — Rest / Active Recovery</h4>
+    <p></p>
+  </div>
+</section>
+
+<!-- ===== WEEK 6 ===== -->
+<section class="week-section" id="week6">
+  <div class="week-header">
+    <div class="week-num">Week 6 — Build</div>
+    <div><div class="week-title">Build</div><div class="week-desc">Same structure as Week 5. Push RPE to a true 7-8 on every exercise. Apply weight increases where you hit the top of rep ranges last week.</div></div>
+  </div>
+
+  <!-- DAY 1: Upper A — Chest + Back + Shoulders + Triceps + Rear Delts -->
+  <div class="day-card" id="day-w6d1">
+    <div class="day-header" onclick="toggleDay('day-w6d1')">
+      <div class="day-dot dot-upper"></div>
+      <div class="day-name">Day 1 — Upper A</div>
+      <div class="day-day">Monday</div>
+      <div class="day-tags"><span class="muscle-tag">Chest</span><span class="muscle-tag">Back</span><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Triceps</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w6d1"></div></div><div class="day-progress-pct" id="pct-w6d1">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bench Press</div><div class="exercise-cat">Chest · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 6-8</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2-3 min</span></div>
+        <div class="exercise-note">Main chest builder. Heavy and controlled. Retract scapula, feet flat, bar to mid-chest.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Retract shoulder blades. Arch slightly. Grip just outside shoulder-width. Lower to mid-chest. Press up and slightly back.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-bench-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-bench-reps"></td><td><select data-key="w6d1-bench-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-bench-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell OHP</div><div class="exercise-cat">Shoulders · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 6-8</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2 min</span></div>
+        <div class="exercise-note">Standing overhead press. Best shoulder mass builder. Brace core hard, press bar in a slight arc over your head.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-overhead-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Feet shoulder-width. Brace abs tight. Bar starts at upper chest. Press straight up, head moves back slightly to let bar pass. Lock out at top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-ohp-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-ohp-reps"></td><td><select data-key="w6d1-ohp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-ohp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Row (Seated)</div><div class="exercise-cat">Back · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">V-handle. Pull to lower chest. Squeeze shoulder blades together at the end of each rep.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-cable-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-crow-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-crow-reps"></td><td><select data-key="w6d1-crow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-crow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Incline Dumbbell Press</div><div class="exercise-cat">Upper Chest · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">30-45° bench. Upper chest emphasis. Full stretch at bottom, squeeze at top.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-incline-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-incdb-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-incdb-reps"></td><td><select data-key="w6d1-incdb-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-incdb-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Tricep Pushdown (Cable)</div><div class="exercise-cat">Triceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Rope or straight bar. Elbows pinned to sides. Full extension at bottom.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-rope-pushdown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-tpd-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-tpd-reps"></td><td><select data-key="w6d1-tpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-tpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Curl</div><div class="exercise-cat">Biceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Direct bicep hit #1 this week. Shoulder-width grip, controlled negative. Don't swing.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-bcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-bcurl-reps"></td><td><select data-key="w6d1-bcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-bcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Face Pull (Cable)</div><div class="exercise-cat">Rear Delts · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Shoulder health. Keep light. Rope at face height, external rotation at end of movement.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-seated-rope-face-pull" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d1-fp-weight"></td><td><input type="number" placeholder="reps" data-key="w6d1-fp-reps"></td><td><select data-key="w6d1-fp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d1-fp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2: Lower A — Quads + Hamstrings + Glutes + Calves -->
+  <div class="day-card" id="day-w6d2">
+    <div class="day-header" onclick="toggleDay('day-w6d2')">
+      <div class="day-dot dot-lower"></div>
+      <div class="day-name">Day 2 — Lower A</div>
+      <div class="day-day">Tuesday</div>
+      <div class="day-tags"><span class="muscle-tag">Quads</span><span class="muscle-tag">Hamstrings</span><span class="muscle-tag">Glutes</span><span class="muscle-tag">Calves</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w6d2"></div></div><div class="day-progress-pct" id="pct-w6d2">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w6d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Back Squat</div><div class="exercise-cat">Quads/Glutes · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 6-8</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2-3 min</span></div>
+        <div class="exercise-note">King of lower body. ACL note: if any discomfort swap to Hack Squat. Drive knees out over toes.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Bar on upper traps. Brace core hard. Push knees out over toes. Squat to at least parallel. Drive through full foot on the way up.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d2-sq-weight"></td><td><input type="number" placeholder="reps" data-key="w6d2-sq-reps"></td><td><select data-key="w6d2-sq-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d2-sq-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Press</div><div class="exercise-cat">Quads · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Feet shoulder-width, mid-platform. Don't lock knees at top. Good quad finisher after squat.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-leg-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d2-lp-weight"></td><td><input type="number" placeholder="reps" data-key="w6d2-lp-reps"></td><td><select data-key="w6d2-lp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d2-lp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Romanian Deadlift</div><div class="exercise-cat">Hamstrings · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Push hips back — this is a hinge, not a squat. Feel the hamstring stretch. Bar stays close to legs.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-romanian-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Push hips BACK, soft knee bend. Keep bar close to legs. Flat back throughout. Squeeze glutes hard to come up.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d2-rdl-weight"></td><td><input type="number" placeholder="reps" data-key="w6d2-rdl-reps"></td><td><select data-key="w6d2-rdl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d2-rdl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Curl (Seated)</div><div class="exercise-cat">Hamstrings · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Slow 3-second eccentric on the way back. Hamstrings respond well to slow negatives.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-leg-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d2-lcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w6d2-lcurl-reps"></td><td><select data-key="w6d2-lcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d2-lcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hip Thrust (Barbell)</div><div class="exercise-cat">Glutes · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Use a pad. Drive through heels. Full hip extension at top — pause 1 second and squeeze.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-hip-thrust" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d2-ht-weight"></td><td><input type="number" placeholder="reps" data-key="w6d2-ht-reps"></td><td><select data-key="w6d2-ht-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d2-ht-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Seated Calf Raise</div><div class="exercise-cat">Calves · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 45 sec</span></div>
+        <div class="exercise-note">Full stretch at bottom, 1-second pause at peak contraction. Calves need high reps.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-seated-calf-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d2-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w6d2-calf-reps"></td><td><select data-key="w6d2-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d2-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rest Day -->
+  <div class="day-card" id="day-w6d3">
+    <div class="day-header" onclick="toggleDay('day-w6d3')">
+      <div class="day-dot dot-rest"></div><div class="day-name">Day 3 — Rest</div><div class="day-day">Wednesday</div><div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body"><div class="rest-content">Active recovery: 20-30 min bike or elliptical. No running. Light stretching and foam rolling.</div></div>
+  </div>
+
+  <!-- DAY 4: Upper B — Back + Chest + Shoulders (lateral) + Biceps + Rear Delts -->
+  <div class="day-card" id="day-w6d4">
+    <div class="day-header" onclick="toggleDay('day-w6d4')">
+      <div class="day-dot dot-upper"></div>
+      <div class="day-name">Day 4 — Upper B</div>
+      <div class="day-day">Thursday</div>
+      <div class="day-tags"><span class="muscle-tag">Back</span><span class="muscle-tag">Chest</span><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Biceps</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w6d4"></div></div><div class="day-progress-pct" id="pct-w6d4">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lat Pulldown (Bar)</div><div class="exercise-cat">Back · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 8-10</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 2 min</span></div>
+        <div class="exercise-note">Wide grip. Pull to upper chest. Think elbows into back pockets. Full stretch at the top.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-pulldown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Depress scapula first. Pull elbows down to hips. Slight lean back. Bar to upper chest. Full dead-hang stretch at the top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-lpd-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-lpd-reps"></td><td><select data-key="w6d4-lpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-lpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bent Over Row</div><div class="exercise-cat">Back · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 8-10</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Hinge to 45°, overhand grip. Pull bar to belly button. One of the best mass builders for thickness.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-bent-over-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Hinge at hips ~45°. Flat back — do NOT round. Pull bar to belly button. Squeeze shoulder blades at top. Controlled negative.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-bbrow-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-bbrow-reps"></td><td><select data-key="w6d4-bbrow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-bbrow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Dumbbell Bench Press</div><div class="exercise-cat">Chest · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Second chest session of the week. Greater ROM than barbell. Deep stretch at the bottom.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-dbp-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-dbp-reps"></td><td><select data-key="w6d4-dbp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-dbp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lateral Raise (Dumbbell)</div><div class="exercise-cat">Shoulders · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Second shoulder session. Side delts = shoulder width. Light weight, feel the muscle. Lead with elbows.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-lateral-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-lat-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-lat-reps"></td><td><select data-key="w6d4-lat-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-lat-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Skull Crushers</div><div class="exercise-cat">Triceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Direct tricep hit #2 this week. EZ bar or dumbbells. Lower to forehead, elbows pointed to ceiling. Long head emphasis.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-skull-crusher" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-skull-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-skull-reps"></td><td><select data-key="w6d4-skull-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-skull-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hammer Curl</div><div class="exercise-cat">Biceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Neutral grip (palms face each other). Hits brachialis and long head. Alternating or both together.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-hammer-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-hcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-hcurl-reps"></td><td><select data-key="w6d4-hcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-hcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Rear Delt Fly (Machine)</div><div class="exercise-cat">Rear Delts · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Posture and shoulder health. Light weight, control the rep, squeeze at full extension.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-reverse-fly" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d4-rdf-weight"></td><td><input type="number" placeholder="reps" data-key="w6d4-rdf-reps"></td><td><select data-key="w6d4-rdf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d4-rdf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5: Lower B — Deadlift + BSS + Glutes + Hamstrings + Calves + Core -->
+  <div class="day-card" id="day-w6d5">
+    <div class="day-header" onclick="toggleDay('day-w6d5')">
+      <div class="day-dot dot-lower"></div>
+      <div class="day-name">Day 5 — Lower B</div>
+      <div class="day-day">Friday</div>
+      <div class="day-tags"><span class="muscle-tag">Posterior</span><span class="muscle-tag">Glutes</span><span class="muscle-tag">Hamstrings</span><span class="muscle-tag">Core</span><span class="muscle-tag">Calves</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w6d5"></div></div><div class="day-progress-pct" id="pct-w6d5">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w6d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Conventional Deadlift</div><div class="exercise-cat">Posterior Chain · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 5-6</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 3 min</span></div>
+        <div class="exercise-note">Biggest calorie burner in the programme. Flat back, bar over mid-foot, brace hard before every rep.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Bar over mid-foot. Hinge down, grip just outside legs. Brace hard. Push floor away — don't think "pull." Lock hips and knees simultaneously at top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d5-dl-weight"></td><td><input type="number" placeholder="reps" data-key="w6d5-dl-reps"></td><td><select data-key="w6d5-dl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d5-dl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Bulgarian Split Squat</div><div class="exercise-cat">Quads/Glutes · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12 each leg</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">ACL-friendly single-leg work. Dumbbells at sides. Front knee tracks over toes.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bulgarian-split-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d5-bss-weight"></td><td><input type="number" placeholder="reps" data-key="w6d5-bss-reps"></td><td><select data-key="w6d5-bss-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d5-bss-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Curl (Lying)</div><div class="exercise-cat">Hamstrings · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 12-15</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Hips stay pinned to the pad. Slow eccentric. Different angle to seated curl from Day 2.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-lying-leg-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d5-llcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w6d5-llcurl-reps"></td><td><select data-key="w6d5-llcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d5-llcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Standing Calf Raise</div><div class="exercise-cat">Calves · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 45 sec</span></div>
+        <div class="exercise-note">Second calf session this week. Standing variation hits gastrocnemius more than seated.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-calf-raises" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d5-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w6d5-calf-reps"></td><td><select data-key="w6d5-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d5-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w6d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Crunch</div><div class="exercise-cat">Core · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Loaded core work. Kneel in front of high cable, rope attachment. Crunch down rounding the spine. Hips stay still.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-crunch" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w6d5-cc-weight"></td><td><input type="number" placeholder="reps" data-key="w6d5-cc-reps"></td><td><select data-key="w6d5-cc-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w6d5-cc-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekend-rest">
+    <h4>Days 6 &amp; 7 — Rest / Active Recovery</h4>
+    <p></p>
+  </div>
+</section>
+
+<!-- ===== WEEK 7 ===== -->
+<section class="week-section" id="week7">
+  <div class="week-header">
+    <div class="week-num">Week 7 — Peak</div>
+    <div><div class="week-title">Peak</div><div class="week-desc">Highest volume week of Month 2. 5 sets on all compounds, RPE 8. If you earned weight increases in Weeks 5-6, apply them now. Sleep and protein matter most this week.</div></div>
+  </div>
+
+  <!-- DAY 1: Upper A — Chest + Back + Shoulders + Triceps + Rear Delts -->
+  <div class="day-card" id="day-w7d1">
+    <div class="day-header" onclick="toggleDay('day-w7d1')">
+      <div class="day-dot dot-upper"></div>
+      <div class="day-name">Day 1 — Upper A</div>
+      <div class="day-day">Monday</div>
+      <div class="day-tags"><span class="muscle-tag">Chest</span><span class="muscle-tag">Back</span><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Triceps</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w7d1"></div></div><div class="day-progress-pct" id="pct-w7d1">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bench Press</div><div class="exercise-cat">Chest · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 6-8</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 2-3 min</span></div>
+        <div class="exercise-note">Main chest builder. Heavy and controlled. Retract scapula, feet flat, bar to mid-chest.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Retract shoulder blades. Arch slightly. Grip just outside shoulder-width. Lower to mid-chest. Press up and slightly back.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-bench-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-bench-reps"></td><td><select data-key="w7d1-bench-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-bench-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell OHP</div><div class="exercise-cat">Shoulders · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 6-8</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 2 min</span></div>
+        <div class="exercise-note">Standing overhead press. Best shoulder mass builder. Brace core hard, press bar in a slight arc over your head.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-overhead-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Feet shoulder-width. Brace abs tight. Bar starts at upper chest. Press straight up, head moves back slightly to let bar pass. Lock out at top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-ohp-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-ohp-reps"></td><td><select data-key="w7d1-ohp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-ohp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Row (Seated)</div><div class="exercise-cat">Back · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 10-12</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">V-handle. Pull to lower chest. Squeeze shoulder blades together at the end of each rep.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-cable-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-crow-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-crow-reps"></td><td><select data-key="w7d1-crow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-crow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Incline Dumbbell Press</div><div class="exercise-cat">Upper Chest · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">30-45° bench. Upper chest emphasis. Full stretch at bottom, squeeze at top.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-incline-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-incdb-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-incdb-reps"></td><td><select data-key="w7d1-incdb-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-incdb-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Tricep Pushdown (Cable)</div><div class="exercise-cat">Triceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 12-15</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Rope or straight bar. Elbows pinned to sides. Full extension at bottom.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-rope-pushdown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-tpd-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-tpd-reps"></td><td><select data-key="w7d1-tpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-tpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Curl</div><div class="exercise-cat">Biceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Direct bicep hit #1 this week. Shoulder-width grip, controlled negative. Don't swing.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-bcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-bcurl-reps"></td><td><select data-key="w7d1-bcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-bcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Face Pull (Cable)</div><div class="exercise-cat">Rear Delts · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Shoulder health. Keep light. Rope at face height, external rotation at end of movement.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-seated-rope-face-pull" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d1-fp-weight"></td><td><input type="number" placeholder="reps" data-key="w7d1-fp-reps"></td><td><select data-key="w7d1-fp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d1-fp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2: Lower A — Quads + Hamstrings + Glutes + Calves -->
+  <div class="day-card" id="day-w7d2">
+    <div class="day-header" onclick="toggleDay('day-w7d2')">
+      <div class="day-dot dot-lower"></div>
+      <div class="day-name">Day 2 — Lower A</div>
+      <div class="day-day">Tuesday</div>
+      <div class="day-tags"><span class="muscle-tag">Quads</span><span class="muscle-tag">Hamstrings</span><span class="muscle-tag">Glutes</span><span class="muscle-tag">Calves</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w7d2"></div></div><div class="day-progress-pct" id="pct-w7d2">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w7d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Back Squat</div><div class="exercise-cat">Quads/Glutes · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 6-8</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 2-3 min</span></div>
+        <div class="exercise-note">King of lower body. ACL note: if any discomfort swap to Hack Squat. Drive knees out over toes.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Bar on upper traps. Brace core hard. Push knees out over toes. Squat to at least parallel. Drive through full foot on the way up.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d2-sq-weight"></td><td><input type="number" placeholder="reps" data-key="w7d2-sq-reps"></td><td><select data-key="w7d2-sq-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d2-sq-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Press</div><div class="exercise-cat">Quads · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 10-12</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Feet shoulder-width, mid-platform. Don't lock knees at top. Good quad finisher after squat.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-leg-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d2-lp-weight"></td><td><input type="number" placeholder="reps" data-key="w7d2-lp-reps"></td><td><select data-key="w7d2-lp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d2-lp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Romanian Deadlift</div><div class="exercise-cat">Hamstrings · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 10-12</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Push hips back — this is a hinge, not a squat. Feel the hamstring stretch. Bar stays close to legs.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-romanian-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Push hips BACK, soft knee bend. Keep bar close to legs. Flat back throughout. Squeeze glutes hard to come up.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d2-rdl-weight"></td><td><input type="number" placeholder="reps" data-key="w7d2-rdl-reps"></td><td><select data-key="w7d2-rdl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d2-rdl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Curl (Seated)</div><div class="exercise-cat">Hamstrings · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 12-15</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Slow 3-second eccentric on the way back. Hamstrings respond well to slow negatives.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-leg-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d2-lcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w7d2-lcurl-reps"></td><td><select data-key="w7d2-lcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d2-lcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hip Thrust (Barbell)</div><div class="exercise-cat">Glutes · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Use a pad. Drive through heels. Full hip extension at top — pause 1 second and squeeze.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-hip-thrust" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d2-ht-weight"></td><td><input type="number" placeholder="reps" data-key="w7d2-ht-reps"></td><td><select data-key="w7d2-ht-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d2-ht-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d2">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Seated Calf Raise</div><div class="exercise-cat">Calves · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 15-20</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 45 sec</span></div>
+        <div class="exercise-note">Full stretch at bottom, 1-second pause at peak contraction. Calves need high reps.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-seated-calf-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d2-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w7d2-calf-reps"></td><td><select data-key="w7d2-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d2-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rest Day -->
+  <div class="day-card" id="day-w7d3">
+    <div class="day-header" onclick="toggleDay('day-w7d3')">
+      <div class="day-dot dot-rest"></div><div class="day-name">Day 3 — Rest</div><div class="day-day">Wednesday</div><div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body"><div class="rest-content">Active recovery: 20-30 min bike or elliptical. No running. Light stretching and foam rolling.</div></div>
+  </div>
+
+  <!-- DAY 4: Upper B — Back + Chest + Shoulders (lateral) + Biceps + Rear Delts -->
+  <div class="day-card" id="day-w7d4">
+    <div class="day-header" onclick="toggleDay('day-w7d4')">
+      <div class="day-dot dot-upper"></div>
+      <div class="day-name">Day 4 — Upper B</div>
+      <div class="day-day">Thursday</div>
+      <div class="day-tags"><span class="muscle-tag">Back</span><span class="muscle-tag">Chest</span><span class="muscle-tag">Shoulders</span><span class="muscle-tag">Biceps</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w7d4"></div></div><div class="day-progress-pct" id="pct-w7d4">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lat Pulldown (Bar)</div><div class="exercise-cat">Back · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 8-10</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 2 min</span></div>
+        <div class="exercise-note">Wide grip. Pull to upper chest. Think elbows into back pockets. Full stretch at the top.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-pulldown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Depress scapula first. Pull elbows down to hips. Slight lean back. Bar to upper chest. Full dead-hang stretch at the top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-lpd-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-lpd-reps"></td><td><select data-key="w7d4-lpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-lpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bent Over Row</div><div class="exercise-cat">Back · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 8-10</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Hinge to 45°, overhand grip. Pull bar to belly button. One of the best mass builders for thickness.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-bent-over-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Hinge at hips ~45°. Flat back — do NOT round. Pull bar to belly button. Squeeze shoulder blades at top. Controlled negative.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-bbrow-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-bbrow-reps"></td><td><select data-key="w7d4-bbrow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-bbrow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Dumbbell Bench Press</div><div class="exercise-cat">Chest · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 10-12</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">Second chest session of the week. Greater ROM than barbell. Deep stretch at the bottom.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-dbp-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-dbp-reps"></td><td><select data-key="w7d4-dbp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-dbp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lateral Raise (Dumbbell)</div><div class="exercise-cat">Shoulders · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 12-15</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Second shoulder session. Side delts = shoulder width. Light weight, feel the muscle. Lead with elbows.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-lateral-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-lat-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-lat-reps"></td><td><select data-key="w7d4-lat-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-lat-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Skull Crushers</div><div class="exercise-cat">Triceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 10-12</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Direct tricep hit #2 this week. EZ bar or dumbbells. Lower to forehead, elbows pointed to ceiling. Long head emphasis.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-skull-crusher" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-skull-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-skull-reps"></td><td><select data-key="w7d4-skull-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-skull-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hammer Curl</div><div class="exercise-cat">Biceps · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 12-15</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Neutral grip (palms face each other). Hits brachialis and long head. Alternating or both together.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-hammer-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-hcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-hcurl-reps"></td><td><select data-key="w7d4-hcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-hcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Rear Delt Fly (Machine)</div><div class="exercise-cat">Rear Delts · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 15-20</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Posture and shoulder health. Light weight, control the rep, squeeze at full extension.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-reverse-fly" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d4-rdf-weight"></td><td><input type="number" placeholder="reps" data-key="w7d4-rdf-reps"></td><td><select data-key="w7d4-rdf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d4-rdf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5: Lower B — Deadlift + BSS + Glutes + Hamstrings + Calves + Core -->
+  <div class="day-card" id="day-w7d5">
+    <div class="day-header" onclick="toggleDay('day-w7d5')">
+      <div class="day-dot dot-lower"></div>
+      <div class="day-name">Day 5 — Lower B</div>
+      <div class="day-day">Friday</div>
+      <div class="day-tags"><span class="muscle-tag">Posterior</span><span class="muscle-tag">Glutes</span><span class="muscle-tag">Hamstrings</span><span class="muscle-tag">Core</span><span class="muscle-tag">Calves</span></div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w7d5"></div></div><div class="day-progress-pct" id="pct-w7d5">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w7d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Conventional Deadlift</div><div class="exercise-cat">Posterior Chain · Primary Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 5-6</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 3 min</span></div>
+        <div class="exercise-note">Biggest calorie burner in the programme. Flat back, bar over mid-foot, brace hard before every rep.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <div class="cues-box"><span class="cues-label">Key Cues</span><span class="cues-text">Bar over mid-foot. Hinge down, grip just outside legs. Brace hard. Push floor away — don't think "pull." Lock hips and knees simultaneously at top.</span></div>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d5-dl-weight"></td><td><input type="number" placeholder="reps" data-key="w7d5-dl-reps"></td><td><select data-key="w7d5-dl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d5-dl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Bulgarian Split Squat</div><div class="exercise-cat">Quads/Glutes · Compound</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">5 × 10-12 each leg</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 90 sec</span></div>
+        <div class="exercise-note">ACL-friendly single-leg work. Dumbbells at sides. Front knee tracks over toes.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bulgarian-split-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d5-bss-weight"></td><td><input type="number" placeholder="reps" data-key="w7d5-bss-reps"></td><td><select data-key="w7d5-bss-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d5-bss-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Leg Curl (Lying)</div><div class="exercise-cat">Hamstrings · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 12-15</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Hips stay pinned to the pad. Slow eccentric. Different angle to seated curl from Day 2.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/machine-lying-leg-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d5-llcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w7d5-llcurl-reps"></td><td><select data-key="w7d5-llcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d5-llcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Standing Calf Raise</div><div class="exercise-cat">Calves · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">4 × 15-20</span><span class="badge badge-rpe">RPE 8</span><span class="badge badge-rest">Rest 45 sec</span></div>
+        <div class="exercise-note">Second calf session this week. Standing variation hits gastrocnemius more than seated.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-calf-raises" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d5-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w7d5-calf-reps"></td><td><select data-key="w7d5-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d5-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w7d5">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Crunch</div><div class="exercise-cat">Core · Isolation</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">3 × 15-20</span><span class="badge badge-rpe">RPE 7-8</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Loaded core work. Kneel in front of high cable, rope attachment. Crunch down rounding the spine. Hips stay still.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/cable-crunch" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w7d5-cc-weight"></td><td><input type="number" placeholder="reps" data-key="w7d5-cc-reps"></td><td><select data-key="w7d5-cc-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w7d5-cc-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="weekend-rest">
+    <h4>Days 6 &amp; 7 — Rest / Active Recovery</h4>
+    <p></p>
+  </div>
+</section>
+
+<!-- ===== WEEK 8 DELOAD ===== -->
+<section class="week-section" id="week8">
+  <div class="week-header">
+    <div class="week-num">Week 8 — Deload</div>
+    <div><div class="week-title">Recovery</div><div class="week-desc">Cut volume by ~40%. Same exercises, same weights, fewer sets. Stop well short of failure. Your body adapts during recovery, not during training. Come back stronger for Month 3.</div></div>
+  </div>
+
+  <div class="day-card" id="day-w8d1">
+    <div class="day-header" onclick="toggleDay('day-w8d1')">
+      <div class="day-dot dot-upper"></div><div class="day-name">Day 1 — Upper A (Deload)</div><div class="day-day">Monday</div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w8d1"></div></div><div class="day-progress-pct" id="pct-w8d1">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w8d1"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Bench Press</div><div class="exercise-cat">Chest</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 8</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 2 min</span></div><div class="exercise-note">Same weight as Week 7. Half the sets. Stop well before failure.</div><a class="demo-link" href="https://musclewiki.com/exercise/barbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d1-bench-weight"></td><td><input type="number" placeholder="reps" data-key="w8d1-bench-reps"></td><td><select data-key="w8d1-bench-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d1-bench-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d1"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell OHP</div><div class="exercise-cat">Shoulders</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 8</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 2 min</span></div><a class="demo-link" href="https://musclewiki.com/exercise/barbell-overhead-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d1-ohp-weight"></td><td><input type="number" placeholder="reps" data-key="w8d1-ohp-reps"></td><td><select data-key="w8d1-ohp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d1-ohp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d1"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Cable Row (Seated)</div><div class="exercise-cat">Back</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 10</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 90 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/machine-seated-cable-row" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d1-crow-weight"></td><td><input type="number" placeholder="reps" data-key="w8d1-crow-reps"></td><td><select data-key="w8d1-crow-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d1-crow-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d1"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Tricep Pushdown (Cable)</div><div class="exercise-cat">Triceps</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 12</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 60 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/cable-rope-pushdown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d1-tpd-weight"></td><td><input type="number" placeholder="reps" data-key="w8d1-tpd-reps"></td><td><select data-key="w8d1-tpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d1-tpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d1">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Curl</div><div class="exercise-cat">Biceps</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">2 × 10</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Deload — easy sets, stop well short of failure.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d1-bcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w8d1-bcurl-reps"></td><td><select data-key="w8d1-bcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d1-bcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card" id="day-w8d2">
+    <div class="day-header" onclick="toggleDay('day-w8d2')">
+      <div class="day-dot dot-lower"></div><div class="day-name">Day 2 — Lower A (Deload)</div><div class="day-day">Tuesday</div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w8d2"></div></div><div class="day-progress-pct" id="pct-w8d2">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w8d2"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Barbell Back Squat</div><div class="exercise-cat">Quads</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 8</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 2 min</span></div><a class="demo-link" href="https://musclewiki.com/exercise/barbell-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d2-sq-weight"></td><td><input type="number" placeholder="reps" data-key="w8d2-sq-reps"></td><td><select data-key="w8d2-sq-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d2-sq-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d2"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Romanian Deadlift</div><div class="exercise-cat">Hamstrings</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 10</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 90 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/barbell-romanian-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d2-rdl-weight"></td><td><input type="number" placeholder="reps" data-key="w8d2-rdl-reps"></td><td><select data-key="w8d2-rdl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d2-rdl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d2"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Seated Calf Raise</div><div class="exercise-cat">Calves</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 15</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 45 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-seated-calf-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d2-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w8d2-calf-reps"></td><td><select data-key="w8d2-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d2-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="day-card" id="day-w8d3"><div class="day-header" onclick="toggleDay('day-w8d3')"><div class="day-dot dot-rest"></div><div class="day-name">Day 3 — Rest</div><div class="day-day">Wednesday</div><div class="day-chevron">▾</div></div><div class="day-body"><div class="rest-content">Recovery. Light walk, stretch, foam roll.</div></div></div>
+
+  <div class="day-card" id="day-w8d4">
+    <div class="day-header" onclick="toggleDay('day-w8d4')">
+      <div class="day-dot dot-upper"></div><div class="day-name">Day 4 — Upper B (Deload)</div><div class="day-day">Thursday</div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w8d4"></div></div><div class="day-progress-pct" id="pct-w8d4">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w8d4"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lat Pulldown (Bar)</div><div class="exercise-cat">Back</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 8</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 2 min</span></div><a class="demo-link" href="https://musclewiki.com/exercise/machine-pulldown" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d4-lpd-weight"></td><td><input type="number" placeholder="reps" data-key="w8d4-lpd-reps"></td><td><select data-key="w8d4-lpd-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d4-lpd-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d4"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Dumbbell Bench Press</div><div class="exercise-cat">Chest</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 10</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 90 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bench-press" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d4-dbp-weight"></td><td><input type="number" placeholder="reps" data-key="w8d4-dbp-reps"></td><td><select data-key="w8d4-dbp-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d4-dbp-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d4"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Lateral Raise (Dumbbell)</div><div class="exercise-cat">Shoulders</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 12</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 60 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-lateral-raise" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d4-lat-weight"></td><td><input type="number" placeholder="reps" data-key="w8d4-lat-reps"></td><td><select data-key="w8d4-lat-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d4-lat-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d4">
+        <div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Skull Crushers</div><div class="exercise-cat">Triceps</div></div></div>
+        <div class="exercise-meta"><span class="badge badge-sets">2 × 10</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 60 sec</span></div>
+        <div class="exercise-note">Deload — easy sets only.</div>
+        <a class="demo-link" href="https://musclewiki.com/exercise/barbell-skull-crusher" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+        <table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d4-skull-weight"></td><td><input type="number" placeholder="reps" data-key="w8d4-skull-reps"></td><td><select data-key="w8d4-skull-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d4-skull-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table>
+      </div>
+      <div class="exercise" data-day="w8d4"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Hammer Curl</div><div class="exercise-cat">Biceps</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 12</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 60 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-hammer-curl" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d4-hcurl-weight"></td><td><input type="number" placeholder="reps" data-key="w8d4-hcurl-reps"></td><td><select data-key="w8d4-hcurl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d4-hcurl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="day-card" id="day-w8d5">
+    <div class="day-header" onclick="toggleDay('day-w8d5')">
+      <div class="day-dot dot-lower"></div><div class="day-name">Day 5 — Lower B (Deload)</div><div class="day-day">Friday</div>
+      <div class="day-progress-wrap"><div class="day-progress-bar"><div class="day-progress-fill" id="prog-w8d5"></div></div><div class="day-progress-pct" id="pct-w8d5">0%</div></div>
+      <div class="day-chevron">▾</div>
+    </div>
+    <div class="day-body">
+      <div class="exercise" data-day="w8d5"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Conventional Deadlift</div><div class="exercise-cat">Posterior Chain</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 5</span><span class="badge badge-rpe">RPE 6-7</span><span class="badge badge-rest">Rest 3 min</span></div><a class="demo-link" href="https://musclewiki.com/exercise/barbell-deadlift" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d5-dl-weight"></td><td><input type="number" placeholder="reps" data-key="w8d5-dl-reps"></td><td><select data-key="w8d5-dl-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d5-dl-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d5"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Bulgarian Split Squat</div><div class="exercise-cat">Quads/Glutes</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 10 each</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 90 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/dumbbell-bulgarian-split-squat" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d5-bss-weight"></td><td><input type="number" placeholder="reps" data-key="w8d5-bss-reps"></td><td><select data-key="w8d5-bss-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d5-bss-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+      <div class="exercise" data-day="w8d5"><div class="exercise-top"><div class="exercise-info"><div class="exercise-name">Standing Calf Raise</div><div class="exercise-cat">Calves</div></div></div><div class="exercise-meta"><span class="badge badge-sets">2 × 12</span><span class="badge badge-rpe">RPE 6</span><span class="badge badge-rest">Rest 45 sec</span></div><a class="demo-link" href="https://musclewiki.com/exercise/barbell-calf-raises" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a><table class="log-table"><thead><tr><th>Weight (kg)</th><th>Reps</th><th>RPE</th><th>Notes</th><th></th></tr></thead><tbody><tr><td><input type="number" placeholder="kg" data-key="w8d5-calf-weight"></td><td><input type="number" placeholder="reps" data-key="w8d5-calf-reps"></td><td><select data-key="w8d5-calf-rpe"><option value="">—</option><option>6</option><option>7</option><option>8</option><option>9</option></select></td><td><input type="text" placeholder="notes" data-key="w8d5-calf-notes"></td><td><button class="save-btn" onclick="saveRow(this)">✓ Save</button></td></tr></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="weekend-rest">
+    <h4>Days 6 &amp; 7 — Full Assessment</h4>
+    <p>End of Block 2. Record all working weights. Compare to Week 5. Compare to Month 1. You've completed 8 weeks — note what needs adjusting for Month 3.</p>
+  </div>
+</section>
+
+<div class="footer-notes">
+  <div class="footer-notes-box">
+    <p><strong>Progression Rules:</strong> Upper compounds +2.5kg when hitting top of rep range at RPE 7-8 for 2 sessions. Lower compounds +5kg same criteria. Accessories add reps before adding weight.</p>
+    <p><strong>Every Muscle 2× Per Week:</strong> Chest — Day 1 (Bench + Incline) &amp; Day 4 (DB Press). Shoulders — Day 1 (OHP) &amp; Day 4 (Lateral Raise). Triceps — Day 1 &amp; Day 4 (indirect via press). Biceps — Day 4 (Hammer Curl) &amp; indirect Day 1 via rows. Back — Day 1 (Cable Row) &amp; Day 4 (Pulldown + BB Row). Calves — Day 2 (Seated) &amp; Day 5 (Standing).</p>
+    <p><strong>Cardio:</strong> 2-3× per week low-impact (bike, elliptical, brisk walk). No running — protect the shins and knees. 20-30 min on rest days.</p>
+    <p><strong>Fat Loss:</strong> The gym builds muscle. The kitchen drives fat loss. Moderate calorie deficit, 1.6-2g protein per kg bodyweight, 7-8 hours sleep.</p>
+    <p><strong>ACL Protocol:</strong> Any knee pain on squats → swap to Hack Squat or Leg Press immediately. Flag it in your log.</p>
+  </div>
+</div>
+
+<div class="export-row">
+  <button class="export-btn" onclick="exportLog()">📋 Export Log</button>
+  <button class="export-btn danger" onclick="clearAll()">🗑 Clear All Data</button>
+</div>
+
+<script>
+const STORAGE_KEY='fekry_m2v2_log';
+function getLog(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch{return{}}}
+function saveLog(log){localStorage.setItem(STORAGE_KEY,JSON.stringify(log))}
+function saveRow(btn){
+  const row=btn.closest('tr');
+  const log=getLog();
+  row.querySelectorAll('input,select').forEach(inp=>{if(inp.dataset.key)log[inp.dataset.key]=inp.value});
+  saveLog(log);
+  btn.textContent='✓ Saved';btn.classList.add('saved');
+  setTimeout(()=>{btn.textContent='✓ Save';btn.classList.remove('saved')},1500);
+  const day=btn.closest('[data-day]').dataset.day;
+  updateProgress(day);
+}
+function loadAll(){
+  const log=getLog();
+  document.querySelectorAll('input[data-key],select[data-key]').forEach(inp=>{if(log[inp.dataset.key]!==undefined)inp.value=log[inp.dataset.key]});
+  const days=new Set();
+  document.querySelectorAll('.exercise[data-day]').forEach(ex=>days.add(ex.dataset.day));
+  days.forEach(d=>updateProgress(d));
+}
+function updateProgress(day){
+  const exercises=document.querySelectorAll(`.exercise[data-day="${day}"]`);
+  let filled=0;
+  exercises.forEach(ex=>{const w=ex.querySelector('input[data-key$="-weight"]');if(w&&w.value)filled++});
+  const pct=exercises.length?Math.round(filled/exercises.length*100):0;
+  const fill=document.getElementById('prog-'+day);
+  const pctEl=document.getElementById('pct-'+day);
+  if(fill)fill.style.width=pct+'%';
+  if(pctEl)pctEl.textContent=pct+'%';
+}
+function toggleDay(id){document.getElementById(id).classList.toggle('open')}
+function exportLog(){
+  const log=getLog();
+  const lines=['Fekry — Month 2 v2 Log Export','=========================',''];
+  Object.entries(log).forEach(([k,v])=>{if(v)lines.push(k+': '+v)});
+  const blob=new Blob([lines.join('\n')],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fekry_month2_v2_log.txt';a.click();
+}
+function clearAll(){
+  if(confirm('Clear all saved data?')){
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('input[data-key]').forEach(i=>i.value='');
+    document.querySelectorAll('select[data-key]').forEach(s=>s.value='');
+    document.querySelectorAll('.day-progress-fill').forEach(b=>b.style.width='0%');
+    document.querySelectorAll('.day-progress-pct').forEach(p=>p.textContent='0%');
+  }
+}
+function setLang(lang){
+  document.body.classList.toggle('ar',lang==='ar');
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+}
+loadAll();
+</script>
+</body>
+</html>
